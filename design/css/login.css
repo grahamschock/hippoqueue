@@ -1,0 +1,53 @@
+* {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+:root {
+  --shadowDark: #D9DDE6;
+  --background: #E4E9F2;
+  --shadowLight: #EFF5FE;
+}
+
+.navbar {
+    background: rgba(0,0,0,0);
+}
+.progress {
+    background: rgba(0, 0, 0, 0);
+}
+.box {
+    background: rgba(0,0,0,0);
+}
+html, body {
+    background: var(--background);
+    margin: 0;
+    height: 100%;
+}
+
+.hero-body {
+  justify-content: center;
+}
+
+.login {
+  border-radius: 25px;
+  padding: 1.5rem;
+  box-shadow: 8px 8px 15px var(--shadowDark), -8px -8px 15px var(--shadowLight);
+}
+
+.container {
+  border-radius: 50px;
+  padding: 1.5rem;
+  box-shadow: 8px 8px 15px var(--shadowDark), -16px -16px 30px var(--shadowLight);
+  margin-bottom: 3rem;
+}
+
+.table {
+    background: rgba(0,0,0,0);
+}
+
+input {
+  background: var(--shadowDark) !important;
+}
+
+a {
+  font-weight: 600;
+}
