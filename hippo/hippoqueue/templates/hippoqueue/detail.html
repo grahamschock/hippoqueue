@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> OH Detail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'hippoqueue/styles.css' %}">
+  </head>
+  <div class="container">
+
+    <nav class="navbar is-transparent">
+      <div class="navbar-brand">
+        <img src="{% static 'hippoqueue/imgs/logo.svg' %}" width="112" height="28">
+                <div class="navbar-burger burger" data-target="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="admin.html">
+                      My OH
+          </a>
+                    <a class="navbar-item" href="admin.html">
+                      Join OH
+          </a>
+                </div>
+
+            </div>
+    </nav>
+  </div>
+
+  <body>
+    {% if teacher and started %}
+    <div class = "container">
+      <section class="hero">
+        <form>
+          <div class="hero-body has-text-centered">
+            <h1 class="title">Hello, {{teacher_name}}</h1>
+          </div>
+          <div class="hero-body has-text-centered">
+            <button class="button is-block is-primary is-medium is-rounded is-fullwidth is-danger" type="submit">
+              Stop OH
+            </button>
+        </form>
+        </div>
+    </div>
+    </section>
+</div>
+
+    <div class="container">
+      <section class = "hero is-fullheight">
+              <table class="table is-fullwidth">
+                <tbody>
+                  {% for student in officehour.student_set.all %}
+                  <tr>
+                    <td>
+                      <form action="{% url 'hippoqueue:remove' teacher_name student.id %}" method="post">
+                        {% csrf_token %}
+                      {{student.fname}} {{student.lname}}
+                    </td>
+                    <td class="level-right">
+            <button class="button is-small is-primary" type="submit"> Complete  </button>
+                    </td>
+                    </form>
+                  </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+
+              </table>
+    </section>
+</div>
+    {% elif teacher%}
+    <div class = "container">
+      <section class="hero is-fullheight">
+        <form class = "box" action="{% url 'hippoqueue:start' teacher_name %}" method="post">
+          {% csrf_token %}
+          <div class="hero-body has-text-centered">
+            <h1 class="title">Hello, {{teacher_name}}</h1>
+          </div>
+          <div class="hero-body has-text-centered">
+            <h1 class="subtitle">You currently do not have any OH</h1>
+          </div>
+
+          <div class="hero-body has-text-centered">
+            <button class="button is-block is-primary is-medium is-rounded is-fullwidth" type="submit">
+              Start OH
+            </button>
+        </form>
+        </div>
+    </div>
+    </section>
+</div>
+{% else %}
+    <div class = "container">
+      <section class="hero">
+          <div class="hero-body has-text-centered">
+            <h1 class="title">{{teacher_name}} Office Hours (Systems)</h1>
+          </div>
+          <progress class="progress" value="15" max="100">15%</progress>
+    </section>
+</div>
+
+    <div class="container">
+      <section class = "hero">
+              <table class="table is-fullwidth">
+                <tbody>
+                  {% for student in officehour.student_set.all %}
+                  <tr>
+                    <td>
+                      {{student.fname}} {{student.lname}}
+                    </td>
+                  </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+    </section>
+    </div>
+
+    <div class = "container">
+      <section class = "hero has-text-centered">
+        <form action="{% url 'hippoqueue:add' teacher_name %}" method="post">
+          {% csrf_token %}
+            <div class="field is-grouped">
+              <div class="control">
+                <input class="input is-medium is-rounded" type="name" placeholder="First name" autocomplete="First name" name="fname" required />
+              </div>
+              <div class="control">
+                <input class="input is-medium is-rounded" type="name" placeholder="Last name" autocomplete="Last name" name="lname" required />
+              </div>
+            </div>
+            <br />
+            <button class="button is-block is-primary is-medium is-rounded is-fullwidth" type="submit">
+              Add to Queue
+            </button>
+          </form>
+      </section>
+    </div>
+{% endif %}
+  </body>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    Want to learn more? Interested in contributing? Check us out on <a href="https://github.com/grahamschock/hippoqueue">Github</a>
+
+  </div>
+</footer>
+
+</html>
