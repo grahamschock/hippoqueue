@@ -6,3 +6,6 @@ Hello! Welcome to HippoQueue. This is a student run project for GW's Office Hour
 This project is currently being developed and has a long way to go before being used. 
 
 Currently, a student can add a name to an Office Hour and an admin can remove a name from an Office Hour. 
+
+## Contributors
+[Alex Coleman](https://github.com/acoleman2000) Design, Database Schema
